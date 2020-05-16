@@ -4,13 +4,13 @@
   "description": "spotify command line interface",
   "main": "index.js",
   "bin": {
-    "spotcli": "./lib/src/index.js"
+    "spotcli": "./lib/index.js"
   },
   "scripts": {
     "test": "npm run test",
     "format": "node_modules/.bin/prettier --write \"src/**/*.ts\"",
     "lint": "node_modules/.bin/eslint . --ext .ts --fix",
-    "build": "tsc",
+    "build": "tsc --build src",
     "build:watch": "npm run build -- --watch"
   },
   "keywords": [
@@ -22,6 +22,7 @@
   "dependencies": {
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
+    "dotenv": "^8.2.0",
     "esm": "^3.2.25"
   },
   "devDependencies": {
