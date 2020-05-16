@@ -1,0 +1,15 @@
+# ignore everything
+*
+
+# included files 
+!.gitignore
+!package*.json
+!tsconfig.json
+!.eslintrc.js
+!.prettierrc.js
+
+# included directories
+!bin
+!bin/*
+!src
+!src/*

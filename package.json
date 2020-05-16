@@ -1,0 +1,37 @@
+{
+  "name": "spotcli",
+  "version": "0.0.1",
+  "description": "spotify command line interface",
+  "main": "index.js",
+  "bin": {
+    "spotcli": "./lib/src/index.js"
+  },
+  "scripts": {
+    "test": "npm run test",
+    "format": "node_modules/.bin/prettier --write \"src/**/*.ts\"",
+    "lint": "node_modules/.bin/eslint . --ext .ts --fix",
+    "build": "tsc",
+    "build:watch": "npm run build -- --watch"
+  },
+  "keywords": [
+    "spotify",
+    "cli"
+  ],
+  "author": "Mark B",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
+    "esm": "^3.2.25"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.2"
+  }
+}
