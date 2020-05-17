@@ -2,7 +2,7 @@ import { executeAppleScript } from './../scripts/appleScriptExec';
 import { osaScript } from './../scripts/osascripts';
 import chalk from 'chalk';
 
-import { ExecReturn } from './../scripts/appleScripstExec.interfaces';
+import { logErr, logStd } from './utils';
 import { formatTime } from './../utils';
 import { TimeUnits } from './../utils';
 
@@ -14,16 +14,6 @@ const {
   getTrack,
   getUrl,
 } = osaScript;
-
-function logStd({ stdout, stderr }: ExecReturn): void {
-  if (stderr) {
-    console.log(chalk.red(stderr));
-  }
-  console.log(chalk.blue(stdout.trim()));
-}
-function logErr(err: Error): void {
-  console.error(chalk.red(err.message));
-}
 
 function logStat(script: string): void {
   executeAppleScript(script).then(logStd).catch(logErr);
@@ -55,6 +45,7 @@ function showAll(): void {
           `Artist: ${artist.stdout.trim()}\nTrack: ${track.stdout.trim()}\nAlbum: ${album.stdout.trim()}\nTime: ${positionFormatted}/${durationFormatted}`
         )
       );
+      return;
     })
     .catch(logErr);
 }
