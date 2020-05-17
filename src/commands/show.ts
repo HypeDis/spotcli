@@ -13,6 +13,7 @@ const {
   getPlayerPosition,
   getTrack,
   getUrl,
+  getVol,
 } = osaScript;
 
 function logStat(script: string): void {
@@ -64,8 +65,11 @@ export function show(flag: string): void {
     case 'stats':
       showAll();
       break;
-    case 'url':
+    case 'uri':
       logStat(getUrl);
+      break;
+    case 'vol':
+      logStat(getVol);
       break;
     default:
       console.log('Option not recognized');

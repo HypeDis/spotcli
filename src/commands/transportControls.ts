@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { executeAppleScript } from './../scripts/appleScriptExec';
 import { osaScript } from './../scripts/osascripts';
 import { logErr } from './utils';
+import { Toggles } from './../scripts/osascripts';
 
 const {
   play,
@@ -14,11 +15,16 @@ const {
   quit,
   getDuration,
   getPlayerPosition,
+  setVol,
+  getVol,
+  getToggleStatus,
+  setToggle,
 } = osaScript;
 
 export const transportControls = {
   play: (uri?: string): void => {
     console.log(chalk.green('Playing...'));
+    // FIXME: Need to add validation for uri/url
     if (uri) executeAppleScript(playTrack(uri)).catch(logErr);
     else executeAppleScript(play).catch(logErr);
   },
@@ -117,7 +123,47 @@ export const transportControls = {
       })
       .catch(logErr);
   },
-  // vol
-  // vol up
-  // vol down
+  setVolAbs: (position: number): void => {
+    executeAppleScript(setVol(position));
+  },
+  setVolRelative: (positionChange: number): void => {
+    executeAppleScript(getVol)
+      .then(({ stdout, stderr }) => {
+        if (stderr) console.log(chalk.red(stderr));
+        return parseInt(stdout);
+      })
+      .then(curVol => {
+        // some strange math going on here
+        let newVol = curVol + positionChange;
+        if (newVol < 0) newVol = 0;
+        else if (newVol > 100) newVol = 100;
+        console.log(chalk.blue(`Volume: ${newVol}`));
+        transportControls.setVolAbs(newVol);
+        return;
+      })
+      .catch(logErr);
+  },
+  setToggle: (type: string): void => {
+    type = type.toLowerCase().trim();
+    if (type === 'repeat' || type === 'shuffle') {
+      const toggleKeyword =
+        type === 'repeat' ? Toggles.REPEAT : Toggles.SHUFFLE;
+      executeAppleScript(setToggle(toggleKeyword))
+        .then(({ stderr }) => {
+          if (stderr) console.log(chalk.red(stderr));
+          return executeAppleScript(getToggleStatus(toggleKeyword));
+        })
+        .then(({ stdout, stderr }) => {
+          if (stderr) console.log(chalk.red(stderr));
+          if (stdout)
+            console.log(
+              chalk.blue(`${type}: ${stdout.trim() === 'true' ? 'on' : 'off'}`)
+            );
+          return;
+        })
+        .catch(logErr);
+    } else {
+      console.log('Unrecognized toggle type');
+    }
+  },
 };
