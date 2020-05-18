@@ -1,17 +1,33 @@
 # Spotify cli
 
-NOTE: Only works with osx (mac)
+NOTE: Only works with osx (mac)<br>
 
-Install the package globally
-`npm i -g @hypedis/spotcli'
+## To use:
+
+Install the package globally<br>
+
+```
+npm i -g @hypedis/spotcli
+```
+
+use the `spotcli` command to use the CLI <br>
+
+Example:<br>
+
+```
+# to reduce the volume<br>
+spotcli vol down
+
+# get artist info for currently playing track
+spotcli show artist
+```
 
 ## Commands:
 
 \<\> = required<br>
 [] = optional<br>
 
-`show` \<type\> Show info on currenty playing track.<br>
-type: artist, album, stats, uri<br>
+`show` \<artist, album, stats, uri\> Show info on currenty playing track.<br>
 `play` [URI] Resume playback<br>
 `pause` Toggle between play/pause.<br>
 `quit` Quit Spotify<br>
@@ -25,5 +41,3 @@ type: artist, album, stats, uri<br>
 `vol up` Increases volume by 10%<br>
 `vol down` Decreases volume by 10%<br>
 `help [command]` display help for command<br>
-
-example: `spotcli show artist`
