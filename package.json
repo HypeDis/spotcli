@@ -11,7 +11,8 @@
     "format": "node_modules/.bin/prettier --write \"src/**/*.ts\"",
     "lint": "node_modules/.bin/eslint . --ext .ts --fix",
     "build": "tsc --build src",
-    "build:watch": "npm run build -- --watch"
+    "build:watch": "npm run build -- --watch",
+    "postinstall": "touch .env"
   },
   "keywords": [
     "spotify",
@@ -20,10 +21,12 @@
   "author": "Mark B",
   "license": "ISC",
   "dependencies": {
+    "@types/inquirer": "^6.5.0",
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
     "dotenv": "^8.2.0",
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "inquirer": "^7.1.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.1",

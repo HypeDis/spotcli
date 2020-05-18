@@ -1,6 +1,6 @@
 # Spotify cli
 
-Only
+NOTE: Only works with osx (mac)
 
 Install the package globally
 `npm i -g @hypedis/spotcli'

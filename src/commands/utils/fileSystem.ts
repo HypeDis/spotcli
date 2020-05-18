@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import chalk from 'chalk';
 import { logErr } from './logging';
 
 export interface EnvVarsObj {
@@ -54,8 +55,8 @@ function writeFilePromise(
 function createEnv(): void {
   writeFilePromise(ENV_FILE_PATH, '', 'utf8')
     .then(() => {
-      console.log('File created. Please try again.');
-      return true;
+      console.log(chalk.green('File created.'));
+      return;
     })
     .catch(logErr);
 }
@@ -65,24 +66,27 @@ function readEnv(): Promise<string> {
 }
 
 export function writeToEnv(newEnvVars: EnvVarsObj): Promise<void> {
+  let fileCreated = false;
   return readEnv()
     .then(parseEnv)
     .then(envVarsObj => {
       const combinedEnvVars = { ...envVarsObj, ...newEnvVars };
       const data = convertObjToText(combinedEnvVars);
+      console.log(chalk.green('Writing file...'));
       return writeFilePromise(ENV_FILE_PATH, data, 'utf8');
     })
     .catch(err => {
       if (err.code === 'ENOENT') {
-        console.log('.env file not found. Creating file...');
+        console.log(chalk.green('.env file not found. Creating file...'));
+        fileCreated = true;
         return createEnv();
       } else {
         logErr(err);
       }
     })
-    .finally((fileWasCreated?: boolean) => {
-      if (fileWasCreated) {
-        writeToEnv(newEnvVars);
+    .finally(() => {
+      if (fileCreated) {
+        return writeToEnv(newEnvVars);
       }
     });
 }

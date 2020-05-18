@@ -2,10 +2,13 @@
 import { Command } from 'commander';
 import { version } from './../package.json';
 import * as dotenv from 'dotenv';
-dotenv.config;
+dotenv.config();
 
 import { show } from './commands/show';
+import { makeVolumeCommand } from './commands/volume.commands';
+import { makePlayCommand } from './commands/play.commands';
 import { transportControls } from './commands/transportControls';
+import { register, registerHelpText } from './commands/register';
 
 const program = new Command();
 
@@ -21,18 +24,7 @@ program
     show(type);
   });
 // transport controls
-program
-  .command('play [URI]') // TODO: allow urls as well
-  .description(
-    'Resume playback\nIf optional uri is passed in Spotify will play that'
-  )
-  .action((URI?: string) => {
-    transportControls.play(URI);
-  });
-// song
-// album
-// artist
-// list
+program.addCommand(makePlayCommand());
 program
   .command('pause')
   .description('Toggle between play/pause.')
@@ -85,35 +77,20 @@ program
     transportControls.rewind(parseInt(seconds));
   });
 
-const volume = program.command('vol <position>');
-volume
-  /*subcommand descriptions don't do anything so adding vol up and vol down text here*/
-  .description(
-    `Move the volume slider to the desired position. Range: integer [0, 100]
-vol up Increases volume by 10% 
-vol down Decreases volume by 10%`
-  )
-  .action(position => {
-    transportControls.setVolAbs(parseInt(position));
-  });
-volume
-  .command('up')
-  .description('Increases volume by 10%')
-  .action(() => {
-    transportControls.setVolRelative(10);
-  });
-volume
-  .command('down')
-  .description('Decreases volume by 10%')
-  .action(() => {
-    transportControls.setVolRelative(-10);
-  });
+program.addCommand(makeVolumeCommand());
 
 program
   .command('toggle <type>')
   .description('Toggle shuffle and repeat\nOptions: shuffle, repeat')
   .action(type => {
     transportControls.setToggle(type);
+  });
+
+program
+  .command('register')
+  .description(registerHelpText)
+  .action(() => {
+    register();
   });
 
 program.version(version).parse(process.argv);
