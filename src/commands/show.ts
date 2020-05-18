@@ -3,8 +3,8 @@ import { osaScript } from './../scripts/osascripts';
 import chalk from 'chalk';
 
 import { logErr, logStd } from './utils';
-import { formatTime } from './../utils';
-import { TimeUnits } from './../utils';
+import { formatTime } from './utils';
+import { TimeUnits } from './utils';
 
 const {
   getAlbum,
