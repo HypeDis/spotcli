@@ -8,12 +8,10 @@ export const spotifyApiForClient = new SpotifyWebApi({
 });
 
 export function loadApi(api: SpotifyWebApi): Promise<SpotifyWebApi> {
-  console.log('access token from api', api.getAccessToken());
-  if (api.getAccessToken()) {
-    return api.refreshAccessToken().then(() => api);
-  }
+  // if (api.getAccessToken()) {
+  //   return api.refreshAccessToken().then(() => api);
+  // }
   return getClientAccessToken().then(data => {
-    console.log('setting up spotify api');
     api.setAccessToken(data.access_token);
     return api;
   });
