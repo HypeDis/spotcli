@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { prompt } from 'inquirer';
 // NOTE: writeToEnv import breaks if you dont include index
-import { writeToEnv, logErr, EnvVarsObj } from './utils/index';
+import { writeToEnv, logErr, EnvVarsObj } from '../utils/index';
 
 interface ClientEnvVarsObj extends EnvVarsObj {
   CLIENT_ID: string;

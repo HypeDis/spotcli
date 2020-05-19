@@ -16,9 +16,9 @@ const program = new Command();
 
 // show commands
 program
-  .command('show <type>')
+  .command('show <option>')
   .description(
-    'Show info on currenty playing track.\ntype: artist, album, stats, uri'
+    'Show info on currenty playing track.\nOption: artist, album, stats, uri'
   )
   .action(type => {
     show(type);

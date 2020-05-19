@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { ExecReturn } from './../../scripts/appleScripstExec.interfaces';
+import { ExecReturn } from '../scripts/appleScripstExec.interfaces';
 
 export function logStd({ stdout, stderr }: ExecReturn): void {
   if (stderr) {

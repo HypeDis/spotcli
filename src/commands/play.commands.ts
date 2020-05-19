@@ -5,17 +5,21 @@ import { playArtist, playAlbum, playTrack, playPlaylist } from './play';
 
 export function makePlayCommand(): commander.Command {
   const play = new commander.Command('play') // TODO: allow urls as well
-    .arguments('[URI]')
-    .description(
-      'Resume playback\nIf optional uri is passed in Spotify will play that'
-    )
-    .action((URI = '') => {
-      transportControls.play(URI);
+    .description('Resume playback')
+    .action(() => {
+      transportControls.play();
     });
 
   play
-    .command('artist <name> [rest...]')
-    .description('Play an artists top tracks')
+    .command('uri [uri]')
+    .description('Play a given uri')
+    .action(uri => {
+      transportControls.play(uri);
+    });
+
+  play
+    .command('artist <name> [rest_of_name...]')
+    .description("Play an artist's top tracks")
     .action((name, rest) => {
       const queryName = name + ' ' + rest.join(' ');
       console.log(chalk.green('Searching for artist ' + queryName + '...'));
@@ -23,7 +27,7 @@ export function makePlayCommand(): commander.Command {
       // get uri and play it
     });
   play
-    .command('album <name> [rest...]')
+    .command('album <name> [rest_of_name...]')
     .description('Play an album ')
     .action((name, rest) => {
       const queryName = name + ' ' + rest.join(' ');
@@ -32,7 +36,7 @@ export function makePlayCommand(): commander.Command {
       // get uri and play it
     });
   play
-    .command('track <name> [rest...]')
+    .command('track <name> [rest_of_name...]')
     .description('Play a track')
     .action((name, rest) => {
       const queryName = name + ' ' + rest.join(' ');
@@ -41,8 +45,8 @@ export function makePlayCommand(): commander.Command {
       // get uri and play it
     });
   play
-    .command('list <name> [rest...]')
-    .description('Play a track')
+    .command('list <name> [rest_of_name...]')
+    .description('Play a playlist')
     .action((name, rest) => {
       const queryName = name + ' ' + rest.join(' ');
       console.log(chalk.green('Searching for playlist ' + queryName + '...'));

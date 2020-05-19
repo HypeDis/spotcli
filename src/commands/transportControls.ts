@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { executeAppleScript } from './../scripts/appleScriptExec';
 import { osaScript } from './../scripts/osascripts';
-import { logErr } from './utils';
+import { logErr } from '../utils';
 import { Toggles } from './../scripts/osascripts';
 
 const {
@@ -24,7 +24,6 @@ const {
 export const transportControls = {
   play: (uri?: string): void => {
     console.log(chalk.green('Playing...'));
-    // FIXME: Need to add validation for uri/url
     if (uri) executeAppleScript(playTrack(uri)).catch(logErr);
     else executeAppleScript(play).catch(logErr);
   },
