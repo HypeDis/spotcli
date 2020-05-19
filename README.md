@@ -9,7 +9,7 @@ NOTE: Only works with osx (mac)<br>
 Install the package globally<br>
 
 ```
-npm i -g @hypedis/spotcli
+npm i -g spotcli
 ```
 
 use the `spotcli` command to use the CLI <br>
