@@ -1,10 +1,8 @@
+import chalk from 'chalk';
 import { executeAppleScript } from './../scripts/appleScriptExec';
 import { osaScript } from './../scripts/osascripts';
-import chalk from 'chalk';
 
-import { logErr, logStd } from '../utils';
-import { formatTime } from '../utils';
-import { TimeUnits } from '../utils';
+import { logErr, logStd, formatTime, TimeUnits } from '../utils/index';
 
 const {
   getAlbum,
@@ -51,7 +49,8 @@ function showAll(): void {
     .catch(logErr);
 }
 
-export function show(flag: string): void {
+// NOTE: didn't know about subcommands before creating this function. Refactored the show commands to subcommands but left this function the way it is.
+export function showActions(flag: string): void {
   switch (flag) {
     case 'album':
       logStat(getAlbum);

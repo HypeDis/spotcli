@@ -4,7 +4,7 @@ import { version } from './../package.json';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import { show } from './commands/show';
+import { makeShowCommand } from './commands/show.commands';
 import { makeVolumeCommand } from './commands/volume.commands';
 import { makePlayCommand } from './commands/play.commands';
 import { transportControls } from './commands/transportControls';
@@ -15,14 +15,7 @@ const program = new Command();
 //TODO: break each section of commands into their own files and populate using the addCommand method
 
 // show commands
-program
-  .command('show <option>')
-  .description(
-    'Show info on currenty playing track.\nOption: artist, album, stats, uri'
-  )
-  .action(type => {
-    show(type);
-  });
+program.addCommand(makeShowCommand());
 // transport controls
 program.addCommand(makePlayCommand());
 program
@@ -69,7 +62,6 @@ program
   .action(seconds => {
     transportControls.fastForward(parseInt(seconds));
   });
-// rw
 program
   .command('rw <seconds>')
   .description('Rewind by a given amount of seconds')

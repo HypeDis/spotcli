@@ -5,7 +5,9 @@ import { playArtist, playAlbum, playTrack, playPlaylist } from './play';
 
 export function makePlayCommand(): commander.Command {
   const play = new commander.Command('play') // TODO: allow urls as well
-    .description('Resume playback')
+    .description(
+      '[artist|track|album|list|uri] Resume playback or play a specific artist, track, album, playlist, or uri'
+    )
     .action(() => {
       transportControls.play();
     });
