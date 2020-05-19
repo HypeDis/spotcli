@@ -9,6 +9,7 @@
 !.prettierrc.js
 !README.md
 !.eslintignore
+!.npmignore
 
 # included directories
 !bin
