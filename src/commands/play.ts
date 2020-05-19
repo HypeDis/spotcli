@@ -11,6 +11,7 @@ export enum SearchTypes {
 }
 
 export function searchAndPlay(query: string, type: SearchTypes): void {
+  console.log(chalk.green('Searching for ' + type + ' ' + query + '...'));
   loadApi(spotifyApiForClient)
     .then(api => api.search(query, [type as SearchTypes], { limit: 1 }))
     .then(response => {
