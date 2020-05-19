@@ -15,9 +15,8 @@
     "format": "node_modules/.bin/prettier --write \"src/**/*.ts\"",
     "lint": "node_modules/.bin/eslint . --ext .ts --fix",
     "build": "node_modules/.bin/tsc --build src",
-    "install": "npm run build",
     "build:watch": "npm run build -- --watch",
-    "postinstall": "touch .env"
+    "postinstall": "npm run build & touch .env"
   },
   "keywords": [
     "spotify",
