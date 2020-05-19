@@ -1,6 +1,6 @@
 {
   "name": "spotcli",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "spotify command line interface",
   "main": "index.js",
   "bin": {
