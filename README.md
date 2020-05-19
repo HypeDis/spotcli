@@ -27,9 +27,9 @@ spotcli show artist
 \<\> = required<br>
 [] = optional<br>
 
-`show` \<artist, album, stats, uri\> Show info on currenty playing track.<br>
-`play` [URI] Resume playback<br>
-`pause` Toggle between play/pause.<br>
+`show` \<artist|album|stats|uri\> Show info on the currenty playing track.<br>
+`play` [artist|track|album|list|uri] Resume playback or play a specific artist, track, album, playlist, or uri<br>
+`pause` Toggle between play/pause<br>
 `quit` Quit Spotify<br>
 `next` Go to the next track<br>
 `prev` Go to the previous track<br>
